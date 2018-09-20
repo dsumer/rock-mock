@@ -1,0 +1,9 @@
+{
+  "name": "rock-mock",
+  "version": "0.0.1",
+  "description": "it's the solid rock for providing a mock.",
+  "main": "index.js",
+  "repository": "git@github.com:dsumer/rock-mock.git",
+  "author": "Dominik Sumer <domi.sumer@gmail.com>",
+  "license": "MIT"
+}
