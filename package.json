@@ -5,5 +5,11 @@
   "main": "index.js",
   "repository": "git@github.com:dsumer/rock-mock.git",
   "author": "Dominik Sumer <domi.sumer@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "koa": "^2.5.3"
+  }
 }
