@@ -52,3 +52,6 @@ typings/
 .env
 
 .idea/
+
+.cache/
+build/

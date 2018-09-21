@@ -7,9 +7,21 @@
   "author": "Dominik Sumer <domi.sumer@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js"
+    "start": "npm run build-client && npm run start-server",
+    "start-server": "node --inspect index.js",
+    "start-client": "parcel watch ./src/client/app/main.js -d ./src/client/build --public-url=./",
+    "build-client": "parcel build ./src/client/app/main.js -d ./src/client/build --public-url=./"
   },
   "dependencies": {
-    "koa": "^2.5.3"
+    "koa": "^2.5.3",
+    "koa-mount": "^3.0.0",
+    "koa-static": "^5.0.0",
+    "vue": "^2.5.17",
+    "vue-hot-reload-api": "^2.3.1"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^2.2.0",
+    "parcel": "^1.9.7",
+    "vue-template-compiler": "^2.5.17"
   }
 }
