@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "start": "npm run build-client && npm run start-server",
-    "start-server": "node --inspect index.js",
+    "start-server": "nodemon --inspect index.js",
     "start-client": "parcel watch ./src/client/app/main.js -d ./src/client/build --public-url=./",
     "build-client": "parcel build ./src/client/app/main.js -d ./src/client/build --public-url=./"
   },
@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^2.2.0",
+    "nodemon": "^1.18.4",
     "parcel": "^1.9.7",
     "vue-template-compiler": "^2.5.17"
   }

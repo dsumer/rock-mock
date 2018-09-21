@@ -1,17 +1,16 @@
 const Koa = require('koa');
-const mount = require('koa-mount');
-const serve = require('koa-static');
+const {serveAdmin, ensureAdmin} = require('./admin');
+const mapping = require('./mapping');
 
 const App = new Koa();
 
-App.use(mount('/__admin', serve(__dirname + '/../client')));
+App.use(serveAdmin);
+App.use(ensureAdmin);
 
-App.use((ctx, next) => {
-    if (ctx.request.originalUrl.indexOf('/__admin') === 0) {
-        return next();
-    }
+App.use(mapping);
 
-    ctx.body = 'it\'s the solid rock for providing a mock. url:' + ctx.request.originalUrl;
+App.use((ctx) => {
+    ctx.body = 'No mapping found for url: ' + ctx.request.originalUrl;
 });
 
 module.exports = App;
