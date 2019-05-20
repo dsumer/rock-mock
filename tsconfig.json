@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "target": "es6",
     "module": "commonjs",
     "outDir": "dist",
-    "sourceMap": true
+    "sourceMap": true,
+    "jsx": "react"
   },
   "include": [
-    "**/*.ts"
+    "**/*.ts", "src/client/app/App.tsx", "src/client/app/main.tsx"
   ],
   "exclude": [
     "node_modules",
