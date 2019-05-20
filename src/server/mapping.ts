@@ -1,4 +1,4 @@
-const mappings = require('./mappings');
+const mappings = require('./mappings.json');
 
 mappings.sort((mapping) => {
     switch (mapping.type) {
@@ -69,4 +69,4 @@ const mapping = (ctx, next) => {
     next();
 };
 
-module.exports = mapping;
+export default mapping;

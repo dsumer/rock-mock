@@ -7,22 +7,41 @@
   "author": "Dominik Sumer <domi.sumer@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "build-client": "parcel build ./src/client/app/main.js -d ./src/client/build --public-url=./",
     "start": "npm run build-client && npm run start-server",
-    "start-server": "nodemon --inspect index.js",
-    "start-client": "parcel watch ./src/client/app/main.js -d ./src/client/build --public-url=./",
-    "build-client": "parcel build ./src/client/app/main.js -d ./src/client/build --public-url=./"
+    "watch": "npm run build-client && npm run watch-server",
+    "start-server": "node --inspect -r ts-node/register ./index.ts",
+    "watch-server": "nodemon"
   },
   "dependencies": {
     "koa": "^2.5.3",
+    "koa-compose": "^4.1.0",
     "koa-mount": "^3.0.0",
     "koa-static": "^5.0.0",
     "vue": "^2.5.17"
   },
   "devDependencies": {
+    "@types/koa": "^2.0.48",
+    "@types/node": "^12.0.2",
     "@vue/component-compiler-utils": "^2.2.0",
     "nodemon": "^1.18.4",
     "parcel": "^1.9.7",
+    "ts-node": "^8.1.0",
+    "typescript": "^3.4.5",
     "vue-hot-reload-api": "^2.3.1",
     "vue-template-compiler": "^2.5.17"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.ts",
+      "**/*.spec.ts",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "**/*"
+    ],
+    "exec": "npm run start-server",
+    "ext": "ts"
   }
 }
