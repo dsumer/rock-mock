@@ -11,6 +11,8 @@ require("update-electron-app")({
   updateInterval: "1 hour"
 });
 
+Menu.setApplicationMenu(null);
+
 function createWindow() {
   mainWindow = new BrowserWindow({ width: 900, height: 680, webPreferences: { nodeIntegration: true }});
   mainWindow.loadURL(
@@ -19,7 +21,6 @@ function createWindow() {
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
   mainWindow.on("closed", () => (mainWindow = null));
-  Menu.setApplicationMenu(null);
 }
 
 app.on("ready", () => {

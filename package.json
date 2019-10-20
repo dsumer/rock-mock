@@ -35,7 +35,7 @@
     "react-eject": "react-scripts eject",
     "electron-build": "electron-builder",
     "release": "yarn react-build && electron-builder --publish=always",
-    "typescript-build": "tsc --p ./server/ && mv ./server/dist/electron.js ./public && mv ./server/dist/src ./public/src && cp ./server/src/mappings.json ./public/src",
+    "typescript-build": "rm -rf public/src && tsc --p ./server/ && mv ./server/dist/electron.js ./public && mv ./server/dist/src ./public/ && cp ./server/src/mappings.json ./public/src",
     "build": "yarn typescript-build && yarn react-build && yarn electron-build",
     "prestart": "npm run typescript-build",
     "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
