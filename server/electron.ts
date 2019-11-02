@@ -1,5 +1,5 @@
-import { app, BrowserWindow, Menu } from 'electron';
-import App from './src/index';
+import { app as ElectronApp, BrowserWindow, Menu } from 'electron';
+import ServerApp from './src/index';
 
 const path = require('path');
 const isDev = require('electron-is-dev');
@@ -27,21 +27,23 @@ function createWindow() {
   mainWindow.on('closed', () => (mainWindow = null));
 }
 
-app.on('ready', () => {
-  App.listen(4141, () => {
-    console.log("it's the solid rock for providing a mock.");
-  });
+ElectronApp.on('ready', () => {
+  if (!isDev) {
+    ServerApp.listen(4141, () => {
+      console.log("it's the solid rock for providing a mock.");
+    });
+  }
 
   createWindow();
 });
 
-app.on('window-all-closed', () => {
+ElectronApp.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
-    app.quit();
+    ElectronApp.quit();
   }
 });
 
-app.on('activate', () => {
+ElectronApp.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
   }
