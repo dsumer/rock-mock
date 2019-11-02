@@ -22,7 +22,9 @@
     "concurrently": "5.0.0",
     "electron": "6.0.12",
     "electron-builder": "21.2.0",
-    "prettier": "1.4.4",
+    "husky": ">=1",
+    "lint-staged": ">=8",
+    "prettier": "^1.18.2",
     "react-scripts": "3.2.0",
     "typescript": "3.6.4",
     "wait-on": "3.3.0"
@@ -34,11 +36,12 @@
     "react-test": "react-scripts test --env=jsdom",
     "react-eject": "react-scripts eject",
     "electron-build": "electron-builder",
-    "release": "yarn react-build && electron-builder --publish=always",
+    "release": "yarn typescript-build && yarn react-build && electron-builder --publish=always",
     "typescript-build": "rm -rf public/src && tsc --p ./server/ && mv ./server/dist/electron.js ./public && mv ./server/dist/src ./public/ && cp ./server/src/mappings.json ./public/src",
     "build": "yarn typescript-build && yarn react-build && yarn electron-build",
     "prestart": "npm run typescript-build",
-    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
+    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\"",
+    "prettier": "prettier --write **/*.{ts,tsx,js,jsx,css}"
   },
   "browserslist": {
     "production": [
@@ -50,6 +53,17 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,css}": [
+      "prettier --write",
+      "git add"
     ]
   }
 }

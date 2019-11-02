@@ -5,8 +5,8 @@ const App = new Koa();
 
 App.use(mapping);
 
-App.use((ctx) => {
-    ctx.body = 'No mapping found for url: ' + ctx.request.originalUrl;
+App.use(ctx => {
+  ctx.body = 'No mapping found for url: ' + ctx.request.originalUrl;
 });
 
 export default App;
