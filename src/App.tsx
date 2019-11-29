@@ -1,26 +1,44 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+// TODO send mappings from server
+import mappings from './mappings.json';
+import { Mapping, MappingType, EqualMapping, EvalMapping } from './types';
 
-const { app } = window.require('electron').remote;
+const Mappings: Mapping[] = mappings;
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>
-            React + Electron ={' '}
-            <span role="img" aria-label="love">
-              😍
-            </span>
-          </h2>
-        </div>
-        <p className="App-intro">Version: {app.getVersion()}</p>
-      </div>
-    );
-  }
+interface EqualMappingProps {
+  mapping: EqualMapping;
 }
+
+const EqualMappingEditor = (props: EqualMappingProps) => {
+  const { mapping } = props;
+
+  return <div>Eq: {mapping.name}</div>;
+};
+
+interface EvalMappingProps {
+  mapping: EvalMapping;
+}
+
+const EvalMappingEditor = (props: EvalMappingProps) => {
+  const { mapping } = props;
+
+  return <div>Ev: {mapping.name}</div>;
+};
+
+const App = () => {
+  return (
+    <div>
+      {Mappings.map(mapping => {
+        switch (mapping.type) {
+          case MappingType.equal:
+            return <EqualMappingEditor mapping={mapping as EqualMapping} />;
+          case MappingType.eval:
+            return <EvalMappingEditor mapping={mapping as EvalMapping} />;
+        }
+        return <>Unkown mapping type: {mapping.type}</>;
+      })}
+    </div>
+  );
+};
 
 export default App;
